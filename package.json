@@ -20,5 +20,8 @@
   "scripts": {
     "start": "node start",
     "test": "find . -regex '.*/jobs/.*/test/.*.js' | xargs mocha"
+  },
+  "dependencies": {
+    "atlasboard": "^1.0.1"
   }
 }
