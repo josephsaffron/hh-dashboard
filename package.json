@@ -15,13 +15,16 @@
     "node": ">=0.10"
   },
   "devDependencies": {
-    "mocha": "2.3.0"
+    "mocha": "2.3.0",
+    "sqlite3": "^3.1.1"
   },
   "scripts": {
     "start": "node start",
     "test": "find . -regex '.*/jobs/.*/test/.*.js' | xargs mocha"
   },
   "dependencies": {
-    "atlasboard": "^1.0.1"
+    "atlasboard": "^1.0.1",
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^2.1.7"
   }
 }
