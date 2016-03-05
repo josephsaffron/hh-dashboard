@@ -69,8 +69,8 @@ module.exports = {
      Have a look at test/weather for an example of how to unit tests this easily by mocking easyRequest calls
      */
      logger.log(config.globalAuth.openweathermap.apikey);
-    dependencies.easyRequest.JSON('http://api.openweathermap.org/data/2.5/forecast?q=Kitchener&APPID=' + config.globalAuth.openweathermap.apikey, function (err, hourlyRes) {
-      dependencies.easyRequest.JSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=Kitchener&APPID=' + config.globalAuth.openweathermap.apikey, function (err, dailyRes) {
+    dependencies.easyRequest.JSON('http://api.openweathermap.org/data/2.5/forecast?q=Kitchener&units=metric&APPID=' + config.globalAuth.openweathermap.apikey, function (err, hourlyRes) {
+      dependencies.easyRequest.JSON('http://api.openweathermap.org/data/2.5/forecast/daily?q=Kitchener&units=metric&APPID=' + config.globalAuth.openweathermap.apikey, function (err, dailyRes) {
         jobCallback(err, {title: config.widgetTitle, hourlyContent: hourlyRes, dailyContent: dailyRes});
       });
     });

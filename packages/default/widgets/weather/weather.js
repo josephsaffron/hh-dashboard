@@ -35,27 +35,8 @@ widget = {
 
 
 		// daily
-		var dailyWrapper = $('<div class="dailyWrapper"></div>').appendTo(mainContent);
+		var dailyHighContent = $('.dailyhigh', el).html('');
+		var dailyWrapper = $('<div class="dailyWrapper">'+ data.dailyContent.list[0].temp.max + '</div>').appendTo(dailyHighContent);
 
-		if(data.dailyContent && data.dailyContent.list && data.dailyContent.list.length > 0) {
-			var table = $('<table class="dailyTable"></table>').appendTo(dailyWrapper);
-			data.dailyContent.list.forEach(function(weatherItem) {
-				var tr = $('<tr></tr>').appendTo(table);
-
-				// date/day:
-				var utcTime = new Date(weatherItem.dt * 1000);
-				var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-				var td1 = $('<td>' + days[utcTime.getDay()] + '</td>').appendTo(tr);
-
-				var td2 = $('<td><img src="http://openweathermap.org/img/w/' + weatherItem.weather[0].icon + '.png" title="' + weatherItem.weather[0].main +'" /></td>').appendTo(tr);
-				var rainText = '';
-				if (weatherItem.hasOwnProperty('rain')) {
-					rainText = '(' + String(Math.round(weatherItem.rain)) + '%)';
-				}
-				var td3 = $('<td class="rainText">' + rainText + '</td>').appendTo(tr);
-				var td3 = $('<td class="maxTemp">' + Math.round(parseInt(weatherItem.temp.max), 10) + '&deg;</td>').appendTo(tr);
-				var td3 = $('<td class="minTemp">' +Math.round(parseInt( weatherItem.temp.min), 10) + '&deg;</td>').appendTo(tr);
-			});
-		}
 	}
 };
