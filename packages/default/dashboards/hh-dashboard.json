@@ -17,7 +17,7 @@
 
   "config" : {
     "weather":{
-      "interval": 60000,
+      "interval": 21600000,
       "lat": "45.4500N",
       "long": "80.4833W"
     },

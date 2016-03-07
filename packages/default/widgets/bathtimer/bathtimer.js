@@ -3,11 +3,14 @@ widget = {
     onInit: function( el ) {
 
         $( '#levibath', el ).click( function() {
-            $.get( '/jobs/bathtimer/resetBathTimer' );
+            $.get( '/jobs/bathtimer/resetBathTimer?child=levi' );
+            $('#levibath', el).html('0 Days');
+
         });
 
         $( '#leiabath', el ).click( function() {
-            $.get( '/jobs/bathtimer/resetBathTimer' );
+            $.get( '/jobs/bathtimer/resetBathTimer?child=leia' );
+            $('#leiabath', el).html('0 Days');
         });
     },
 
@@ -19,7 +22,9 @@ widget = {
         if (data.title) {
             $('h2', el).text(data.title);
         }
-
-        $('.content', el).html(data.text);
+        var levidays = (Date.now() - data.levi)/86400000;
+        var leiadays = (Date.now() - data.leia)/86400000;
+        $('#levibath', el).html(Math.round(levidays) + ' days');
+        $('#leiabath', el).html(Math.round(leiadays) + ' days');
     }
 };

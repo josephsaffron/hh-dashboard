@@ -11,7 +11,7 @@
  * }
  */
 
-var logger;
+var logger, storage;
 
 module.exports = {
 
@@ -22,15 +22,10 @@ module.exports = {
      */
     onInit: function (config, dependencies) {
         logger = dependencies.logger;
-        /*
-         This is a good place for initialisation logic, like registering routes in express:
+        storage = dependencies.storage;
 
-         dependencies.logger.info('adding routes...');
-         dependencies.app.route("/jobs/mycustomroute")
-         .get(function (req, res) {
-         res.end('So something useful here');
-         });
-         */
+        dependencies.app.route( '/jobs/bathtimer/resetBathTimer' ).get( resetBathTimer );
+
     },
 
     /**
@@ -55,6 +50,14 @@ module.exports = {
          */
 
         var logger = dependencies.logger;
+        storage.get('leia', function(err, leia){
+           storage.get('levi', function(err,levi){
+              jobCallback(null, {
+                  "leia": leia,
+                  "levi": levi
+              });
+           });
+        });
 
         /*
 
@@ -88,15 +91,10 @@ module.exports = {
          Have a look at test/bathtimer for an example of how to unit tests this easily by mocking easyRequest calls
 
          */
-
-        dependencies.easyRequest.HTML('http://google.com', function (err, html) {
-            // logger.trace(html);
-            jobCallback(err, {title: config.widgetTitle, html: html});
-        });
     }
 };
 
 function resetBathTimer( request, response ) {
-    logger.info( 'Resetting bath timer for' );
-
-}
+    logger.info( 'Resetting bath timer for ' + request.query.child );
+    storage.set(request.query.child, Date.now());
+};
